@@ -8,7 +8,7 @@ exports.getBootCamps= (req,res,next)=>{
         success:true,
         message:'Show all bootcamps',
         data:{
-
+           
         }
     });
     next();
@@ -24,7 +24,7 @@ exports.getBootCamp= (req,res,next)=>{
         success:true,
         message:`Display a single bootcamps ${req.params.id}`,
         data:{
-
+           
         }
     });
     next();
