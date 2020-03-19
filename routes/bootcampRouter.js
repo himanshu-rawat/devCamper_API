@@ -1,20 +1,25 @@
-const bootcampController =require('../controllers/bootcampController');
+const bootcampController = require('../controllers/bootcampController');
 
 const expres = require('express');
 
-const router =expres.Router();
+// Include Other Resources Routers
+const courseRouter = require('./courseRouter');
+
+const router = expres.Router();
+
+// Re-route into other resource routers
+router.use('/:bootcampID/courses', courseRouter);
 
 // Show All BootCamps and Create New BootCamp
-router
-    .route('/')
-    .get(bootcampController.getBootCamps)
-    .post(bootcampController.createBootCamp);
+router.route('/').get(bootcampController.getBootCamps).post(bootcampController.createBootCamp);
 
 // Show Single BootCamp, Update a BootCamp, Delete a BootCamp
 router
-    .route('/:id')
-    .get(bootcampController.getBootCamp)
-    .put(bootcampController.updateBootCamp)
-    .delete(bootcampController.deleteBootCamp);
+	.route('/:id')
+	.get(bootcampController.getBootCamp)
+	.put(bootcampController.updateBootCamp)
+	.delete(bootcampController.deleteBootCamp);
 
-module.exports=router;
+//  GET /api/v1/bootcamps/radius/:zipcode/:distance
+router.route('/radius/:zipcode/:distance').get(bootcampController.getBootcampsInRadius);
+module.exports = router;
